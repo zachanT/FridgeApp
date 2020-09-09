@@ -1,0 +1,43 @@
+{
+	"shoppingLists": [
+		{
+			"memberName": "Michael Z.",
+			"list": [
+				{
+					"listItem": "Chicken Breast"
+				},
+				{
+					"listItem": "Peanut Butter"
+				},
+				{
+					"listItem": "Bananas"
+				}
+			]
+		},
+		{
+			"memberName": "Jacus C.",
+			"list": [
+				{
+					"listItem": "Cereal"
+				},
+				{
+					"listItem": "Milk"
+				}
+			]
+		},
+		{
+			"memberName": "Zach C.",
+			"list": [
+				{
+					"listItem": "Granola"
+				},
+				{
+					"listItem": "Bacon"
+				},
+				{
+					"listItem": "Eggs"
+				}
+			]
+		}
+	]
+}

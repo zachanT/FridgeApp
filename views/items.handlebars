@@ -1,0 +1,161 @@
+﻿<!doctype html>
+
+<html>
+<head>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <script src="js/itemsScreen.js"></script>
+   <!--<script src="js/items.js"></script>-->
+
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+   <link href="/css/improved.css" rel="stylesheet" />
+   
+   <!-- Google Analytics -->
+   <script>
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+   ga('create', 'UA-158783760-2', 'auto');
+   ga('require', 'GTM-MPGPLPR');
+   ga('send', 'pageview');
+   </script>
+   <!-- End Google Analytics -->
+</head>
+
+<body>
+   <header id="main-header">
+      <div class="container-fluid">
+         <a id="arrow" href="sections"><i class="fa fa-arrow-left"></i></a>
+      </div>
+   </header>
+
+
+
+   <div class="container-fluid" id="items">
+      {{#each Sections}}
+      <div id="{{sectionName}}">
+         <h1 class="tabHeaders listHeader">{{sectionName}}</h1>
+            <label for="showShared"><h3>Show Shared:</h3></label> <br />
+               <label class="switch">
+               <input type="checkbox" name="showShared">
+               <span class="slider round"></span>
+            </label>
+            {{#each categories}}
+               <h2 class="category-list">{{categoryName}}</h2>
+            {{#each items}}
+               <h2><a href="#" class="item {{shared}}">{{itemName}}<span class="align-right">{{expiration}}</span></a></h2>
+            {{/each}}
+         {{/each}}
+      </div>
+      {{/each}}
+   </div>
+
+   <button class="catBtn" id="addCatbtn"><i class="fa fa-plus"></i> Add Category</button><br />
+   <button id="addItembtn"><i class="fa fa-plus"></i></button>
+   <!--Add item popup-->
+   <div id="myModal" class="modal">
+      <div class="modal-content-items">
+         <span class="close"><i class="fa fa-window-close"></i></span>
+         <h1>Add Item</h1>
+         <form id="addItemForm" role="form" method="get" action="/addItem">
+            <input type="text" placeholder="Bacon" name="itemName" required/><br />
+            <label for="category">Category:</label><br />
+            <select name="category" required>
+               {{#each Sections}}
+               {{#each categories}}
+               <option value="{{categoryName}}">{{categoryName}}</option>
+               {{/each}}
+               {{/each}}
+            </select><br />
+            <input type="text" name="cat" placeholder="New Category" required><br />
+            <input type="hidden" name="sect" class="sect" value="" />
+            <label for="expiration">Expires:</label><br />
+            <input type="date" name="expiration" required /><br />
+            <label for="notification">Notification:</label><br />
+            <input type="text" placeholder="3 Days" name="notification" /><br />
+            <!--<label for="quantity">Quantity:</label><br />
+            <input type="text" placeholder="12" name="quantity" /><br />
+            <label for="units">Units:</label><br />
+            <input type="text" placeholder="oz" name="units" /><br />-->
+            <label for="shared">Shared:</label> <br />
+            <label class="switch">
+               <input type="checkbox" name="shared">
+               <span class="slider round"></span>
+            </label>
+            <input class="adding" type="submit" id="confirmItembtn" value="Add Item" />
+         </form>
+      </div>
+   </div>
+   <!--Item click popup-->
+   <div id="itemClick" class="modal">
+      <div class="modal-content">
+         <span class="close"><i class="fa fa-window-close"></i></span>
+         <header class="addItem-header" id="itemClickHeader">Edit Item</header>
+         <button id="deleteItemBtn">Delete Item</button>
+         <form id="addItemForm" method="get" action="/editItem">
+            <label for="itemName">Item:</label><br />
+            <input type="text" placeholder="Item Name" name="itemName" required/><br />
+            <label for="category">Category:</label><br />
+            <select name="category" required>
+               {{#each Sections}}
+               {{#each categories}}
+               <option value="{{categoryName}}">{{categoryName}}</option>
+               {{/each}}
+               {{/each}}
+            </select><br />
+            <label for="expiration">Expires:</label><br />
+            <input type="date" name="expiration" required/><br />
+            <label for="notification">Notification:</label><br />
+            <input type="text" placeholder="3 Days" name="notification" required/><br />
+            <label for="shared">Shared:</label>
+            <label class="switch">
+               <input type="checkbox">
+               <span class="slider round"></span>
+            </label>
+            <input type="submit" id="confirmItembtn" value="Add Item" />
+         </form>
+      </div>
+   </div>
+   <!--New Category popup-->
+   <div id="newCat" class="modal">
+      <div class="modal-content">
+         <span class="close"><i class="fa fa-window-close"></i></span>
+         <header class="addItem-header" id="newCat"><h1>New Category</h1></header>
+         <form id="addCatForm" method="get" action="/addCategory">
+            <input type="text" placeholder="Category Name" name="catName" required/><br />
+            <input type="hidden" name="sect" class="sect" value="" />
+            <input type="submit" id="addCatSubmit" value="Confirm" />
+         </form>
+      </div>
+   </div>
+   <!-- Nav bar -->
+   <div class="container-fluid">
+      <div class="row fixed-bottom">
+         <div class="col bottomNav">
+            <a href="sections" class="blackText">
+               <i class="fa fa-cutlery"></i>
+               Sections
+            </a>
+         </div>
+         <div class="col bottomNav">
+            <a href="shoppingList" class="blackText">
+               <i class="fa fa-list-alt"></i>
+               Shopping List
+            </a>
+         </div>
+         <div class="col bottomNav">
+            <a href="group" class="blackText">
+               <i class="fa fa-users"></i>
+               Group
+            </a>
+         </div>
+      </div>
+   </div>
+   <!-- Needed for Bootstrap -->
+   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

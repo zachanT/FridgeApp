@@ -1,0 +1,104 @@
+{
+   "sections": [
+      {
+         "sectionName": "All Items",
+         "html": "allitems.handlebars",
+         "id": "allitems"
+      },
+      {
+         "sectionName": "Pantry",
+         "html": "pantry.handlebars",
+         "id": "pantry"
+      },
+      {
+         "sectionName": "Fridge",
+         "html": "fridge.handlebars",
+         "id": "fridge"
+      }
+   ],
+
+   "members": [
+      {
+         "memberName": "Michael Zuazo",
+         "html": "allmembers.handlebars",
+         "id": "member1"
+      },
+      {
+         "memberName": "Jacus Cortes",
+         "html": "allmembers.handlebars",
+         "id": "member2"
+      }, 
+      {
+         "memberName": "Zachary Chan",
+         "html": "allmembers.handlebars",
+         "id": "member3"
+      }
+   ],
+
+   "categories": [
+      {
+         "categoryName": "Dairy",
+         "section": "Fridge"
+      },
+      {
+         "categoryName": "Fruit",
+         "section": "Fridge"
+      },
+      {
+         "categoryName": "Vegetable",
+         "section": "Fridge"
+      }
+   ],
+
+   "items": [
+      {
+         "itemName": "Milk",
+         "section": "Fridge",
+         "category": "Dairy",
+         "expiration": "1 weeks",
+         "notification": "3 day",
+         "shared": "TRUE"
+      },
+      {
+         "itemName": "Chedder",
+         "section": "Fridge",
+         "category": "Dairy",
+         "expiration": "2 weeks",
+         "notification": "3 day",
+         "shared": "TRUE"
+      },
+      {
+         "itemName": "Greek Yogurt",
+         "section": "Fridge",
+         "category": "Dairy",
+         "expiration": "2 weeks",
+         "notification": "1 day",
+         "shared": "TRUE"
+      },
+      {
+         "itemName": "Apples",
+         "section": "Fridge",
+         "category": "Fruit",
+         "expiration": "2 weeks",
+         "notification": "1 day",
+         "shared": "TRUE"
+      },
+      {
+         "itemName": "Carrots",
+         "section": "Fridge",
+         "category": "Vegetable",
+         "expiration": "2 weeks",
+         "notification": "4 day",
+         "shared": "TRUE"
+      },
+      {
+         "itemName": "Doritos",
+         "section": "Pantry",
+         "category": "Snack",
+         "expiration": "11 monts",
+         "notification": "1 day",
+         "shared": "TRUE"
+      }
+
+   ]
+}

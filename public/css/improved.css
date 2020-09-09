@@ -1,0 +1,262 @@
+body{
+	background-color: #DAE6E8;
+}
+
+.bottomNav{
+	font-size: 40px;
+	text-align: center;
+	height: 130px;
+ 	line-height: 130px;
+ 	background-color: #5B94CD;
+	width: 100%;
+}
+
+.blackText{
+	color: black;
+}
+
+.tabHeaders {
+	text-align: center;
+	font-size: 140px;
+	margin-top: 0.25em;
+	padding-bottom: 0.25em;
+}
+
+.listHeader{
+	padding-bottom: 0;
+}
+
+h2, h2 a{
+	font-size: 50px;
+	text-align: left;
+	margin: 0 35px 0 35px;
+	color: black;
+ }
+
+.button {
+	display: block;
+	width: 100%;
+	border: 2px solid #5B94CD;
+	background-color: white;
+	padding: 1em 0 1em 0;
+	font-size: 100px;
+	cursor: pointer;
+	text-align: center;
+	margin-bottom: 1em;
+}
+
+.member-list {
+	font-size: 100px;
+	border-bottom: 3px solid #5B94CD;
+	margin: 50px 200px 0 25px;
+}
+
+.member-group {
+	font-size: 75px;
+	border-bottom: 3px solid #5B94CD;
+	margin: 50px 200px 0 25px;
+}
+
+.modal {
+   display: none; /* Hidden by default */
+   position: fixed; /* Stay in place */
+   z-index: 1; /* Sit on top */
+   padding-top: 100px; /* Location of the box */
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   overflow: auto; /* Enable scroll if needed */
+   background-color: rgb(0,0,0);
+   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+   font-size: 35px;
+   background-color: #DAE6E8;
+   margin: 25% 25% 0 25%;
+   padding: 20px;
+   border: 3px solid #5B94CD;
+   width: 50%;
+   height: 25%;
+}
+
+.modal-content-list {
+	height: 30%;
+}
+
+.modal-content-items {
+   font-size: 35px;
+   background-color: #DAE6E8;
+   margin: 25% 25% 0 25%;
+   padding: 20px;
+   border: 3px solid #5B94CD;
+   width: 50%;
+   height: 60%;
+}
+
+.close {
+   color: #aaaaaa;
+   text-align: right;
+   font-size: 35px;
+   font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+   color: #000;
+   text-decoration: none;
+   cursor: pointer;
+}
+
+#addSectionbtn, #addItembtn {
+	display:block;
+	position: fixed;
+	height: 150px;
+	width: 150px;
+	border-radius: 50%;
+	border: 3px solid black ;
+	font-size: 75px;
+	bottom: 10%;
+	right: 3%;
+	margin: auto;
+	background-color: white;
+	color: black;
+}
+
+.adding{
+	margin-top: 10px;
+}
+
+select {
+	width: 300px;
+}
+
+option{
+	font-size: 20px;
+}
+
+#arrow{
+	color: black;
+	font-size: 100px;
+}
+
+#main-header{
+	margin-top: 50px;
+}
+
+.category-list {
+	font-size: 80px;
+	border-bottom: 3px solid #5B94CD;
+	margin: 50px 50px 0 25px;
+}
+
+/*shared slider*/
+.slider.round {
+   border-radius: 34px;
+}
+
+.slider.round:before {
+   border-radius: 50%;
+}
+
+.switch {
+   position: relative;
+   display: inline-block;
+   width: 60px;
+   height: 34px;
+}
+
+.switch input {
+   opacity: 0;
+   width: 0;
+   height: 0;
+}
+
+.slider {
+   position: absolute;
+   cursor: pointer;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background-color: #ccc;
+   -webkit-transition: .4s;
+   transition: .4s;
+}
+
+.slider:before {
+   position: absolute;
+   content: "";
+   height: 26px;
+   width: 26px;
+   left: 4px;
+   bottom: 4px;
+   background-color: white;
+   -webkit-transition: .4s;
+   transition: .4s;
+}
+
+input:checked + .slider {
+   background-color: #2196F3;
+}
+
+input:focus + .slider {
+   box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+   -webkit-transform: translateX(26px);
+   -ms-transform: translateX(26px);
+   transform: translateX(26px);
+}
+
+.login-form{
+   position: absolute;
+   left: 50%;
+   top: 40%;
+   transform: translate(-50%, -50%);
+}
+
+.boxes{
+   font-size: 4em;
+   padding: 8px 0;
+   margin: 8px 0;
+   border-bottom: 3px solid #5B94CD;
+
+}
+
+.boxes input {
+   border: none;
+   outline: none;
+   background: none;
+}
+
+.signin {
+   width: 100%;
+   background: none;
+   border: 3px solid #5B94CD;
+   color: black;
+   padding: 8px 0;
+   font-size: 3em;
+   cursor: pointer;
+   margin: 8px 0;
+}
+
+.login{
+   font-size: 6em;
+   border-bottom: 10px solid #5B94CD;
+   margin: 0 500px 50px 0;
+}
+
+.catBtn{
+   margin: 100px auto 0 auto;
+   display: block;
+   font-size: 50px;
+   background: none;
+   border: 3px solid #5B94CD;
+}
+
+.align-right {
+   float: right;
+}

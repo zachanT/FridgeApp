@@ -1,0 +1,108 @@
+{
+
+   "Sections": [
+      {
+         "sectionName": "Fridge",
+         "categories": [
+            {
+               "categoryName": "Veggies",
+               "items": [
+                  {
+                     "itemName": "Carrot",
+                     "expiration": "2020-03-19",
+                     "notification": "3 day",
+                     "quantitiy": "4",
+                     "units": "",
+                     "shared": "on"
+                  },
+                  {
+                     "itemName": "Celery",
+                     "expiration": "2020-03-21",
+                     "notification": "3 day",
+                     "quantitiy": "2",
+                     "units": "",
+                     "shared": null
+                  }
+               ]
+            },
+            {
+               "categoryName": "Fruit",
+               "items": [
+                  {
+                     "itemName": "Mango",
+                     "expiration": "2020-03-19",
+                     "notification": "3 day",
+                     "quantitiy": "3",
+                     "units": "",
+                     "shared": null
+                  },
+                  {
+                     "itemName": "Pineapple",
+                     "expiration": "2020-03-21",
+                     "notification": "3 day",
+                     "quantitiy": "1",
+                     "units": "",
+                     "shared": "on"
+                  },
+                  {
+                     "itemName": "Apple",
+                     "expiration": "2020-03-24",
+                     "notification": "3 day",
+                     "quantitiy": "1",
+                     "units": "",
+                     "shared": "on"
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "sectionName": "Pantry",
+         "categories": [
+            {
+               "categoryName": "Snacks",
+               "items": [
+                  {
+                     "itemName": "Doritos",
+                     "expiration": "2020-05-19",
+                     "notification": "3 day",
+                     "quantitiy": "9.75",
+                     "units": "oz",
+                     "shared": "on"
+                  },
+                  {
+                     "itemName": "Granola Bar",
+                     "expiration": "2020-04-21",
+                     "notification": "3 day",
+                     "quantitiy": "2",
+                     "units": "",
+                     "shared": "on"
+                  }
+               ]
+            },
+            {
+               "categoryName": "Spices",
+               "items": [
+                  {
+                     "itemName": "Paprika",
+                     "expiration": "2020-10-19",
+                     "notification": "3 day",
+                     "quantitiy": "4",
+                     "units": "oz",
+                     "shared": "on"
+                  },
+                  {
+                     "itemName": "Cumene",
+                     "expiration": "2020-4-21",
+                     "notification": "3 day",
+                     "quantitiy": "4",
+                     "units": "oz",
+                     "shared": "on"
+                  }
+               ]
+            }
+         ]
+      }
+   ],
+   "viewAlt": "false"
+}
