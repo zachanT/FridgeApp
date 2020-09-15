@@ -1,13 +1,4 @@
 /**
- working tutorials: https://youtu.be/-RCnNyD0L-s?t=1512
- https://youtu.be/vxu1RrR0vbw?t=1221
- Start: 1:58:48
-
- Option 1: Keep trying to figure out how to send section id to know what was clicked
- Option 2: Have seperate routes for different sections and only have a FIXED number of sections (Fridge, Freezer, Pantry)
- Option 3: No sections, all items in one spot.
-
-/**
  * Module dependencies.
  */
 
