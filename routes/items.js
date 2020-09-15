@@ -8,13 +8,18 @@ const {pool} = require('../DBconfig');
 exports.view = function (request, response) {
    console.log("view");
    var userid = localStorage.getItem('userid');
+   var groupid = localStorage.getItem('groupid');
    let {id} = request.body;
+   if(id){
+      localStorage.setItem('sectid', id);
+   }
    console.log(request.body);
    console.log(id);
+   console.log(request.id);
    pool.query(`SELECT * FROM categories 
                FULL OUTER JOIN items ON categories.id=items.catid
                WHERE userid=$1
-               AND categories.parentid=$2`, [userid, id], (err, results)=>{
+               AND categories.parentid=$2`, [groupid, (id || localStorage.getItem('sectid'))], (err, results)=>{
                   if(err){
                      throw err;
                   }

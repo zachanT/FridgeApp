@@ -1,13 +1,4 @@
 /**
- working tutorials: https://youtu.be/-RCnNyD0L-s?t=1512
- https://youtu.be/vxu1RrR0vbw?t=1221
- Start: 1:58:48
-
- Option 1: Keep trying to figure out how to send section id to know what was clicked
- Option 2: Have seperate routes for different sections and only have a FIXED number of sections (Fridge, Freezer, Pantry)
- Option 3: No sections, all items in one spot.
-
-/**
  * Module dependencies.
  */
 
@@ -163,39 +154,6 @@ app.post('/login', passport.authenticate('local', {
 }), function(req, res){
    console.log(req.user);
 });
-
-/*var i = 0;
-var retrieved = localStorage.getItem('ids');
-var ids = JSON.parse(retrieved);
-console.log(ids);
-for(var key in ids){
-   app.post(('/'+key), (req,res) => {
-      pool.query(`SELECT * FROM categories 
-               FULL OUTER JOIN items ON categories.id=items.id
-               WHERE id=$1`, [key], (err, results)=>{
-                  if(err){
-                     throw err;
-                  }
-                  console.log(localStorage.getItem('id'));
-                  console.log(results.rows);
-                  response.render('items', {"items": results.rows});
-               })
-   })
-}
-/*for(i = 0; i < ids.length; i++){
-   app.post(('/'+ids[i]), (req,res) => {
-      pool.query(`SELECT * FROM categories 
-               FULL OUTER JOIN items ON categories.id=items.id
-               WHERE id=$1`, [ids[i]], (err, results)=>{
-                  if(err){
-                     throw err;
-                  }
-                  console.log(localStorage.getItem('id'));
-                  console.log(results.rows);
-                  response.render('items', {"items": results.rows});
-               })
-   })
-}*/
 
 function checkAuthenticated(req, res, next){
    if(req.isAuthenticated()) {
