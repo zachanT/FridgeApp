@@ -1,17 +1,28 @@
-var section;
-
 $(document).ready(function () {
    initializePage();
 })
 
 function initializePage() {
-   $('.sections').click(SectionClick);
+   //$('.sections').click(SectionClick);
+
+   var ids = [];
+   var temp = $('.names').each(function () {
+      ids.push($(this).attr('action').substring(1));
+   });
+   console.log(JSON.parse(JSON.stringify(ids)));
+   localStorage.setItem('ids', JSON.stringify(ids));
+   return false;
 }
 
 function SectionClick(e) {
    e.preventDefault();
-   section = e.target.id;
-   window.location.href = 'items' + '#' + e.target.id;
+   localStorage.setItem('id', e.target.id);
+   $('#id').val(e.target.id);
+
+   //window.document.location = ('/items', e.target.id);
+   //section = e.target.id;
+   //window.location.href = 'items' + '#' + e.target.id;
+   return false;
 }
 
 window.onload = function () {

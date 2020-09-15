@@ -3,7 +3,6 @@
 <head>
    <title>App Login</title>
 
-   <script src="/js/javascript.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <!-- <link href="/css/style.css" rel="stylesheet" /> -->
    {{> facebook}}
@@ -15,16 +14,24 @@
 </head>
 
 <body>
-
   <div class="login-form">
     <form action="/login" method="POST">
       <h1 class="login">Login</h1>
+       <div class="msges">
+          {{#if messages.success_msg}}
+             <h1>{{messages.success_msg}}</h1>
+          {{/if}}
+
+          {{#if messages.error}}
+            <h1>{{messages.error}}</h1>
+          {{/if}}
+       </div>
       <div class="boxes">
-        <i class="fa fa-user"></i><input type="email" id="email" name="Email address" placeholder = "Email" required>
+        <i class="fa fa-user"></i><input type="email" id="email" name="email" placeholder = "Email" required>
       </div>
 
       <div class="boxes">
-        <i class="fa fa-lock"></i><input type="password" id="password" name="Password" placeholder = "Password" required>
+        <i class="fa fa-lock"></i><input type="password" id="password" name="password" placeholder = "Password" required>
       </div>
       <input class="signin" type="submit" value="Login" />
 

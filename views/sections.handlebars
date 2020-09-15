@@ -3,27 +3,37 @@
 <html>
 <head>
    <title>Food Group</title>
-
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <script src="/js/javascript.js"></script>
    <!-- <link href="/css/style.css" rel="stylesheet" /> -->
-
+   
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
    <link href="/css/improved.css" rel="stylesheet" />
 
 </head>
 <body>
+   <div id="logout"><a href="/logout" class="blackText">Logout</a></div>
    <header id="main-header">
       <div class="container">
          <h1 class="tabHeaders">Sections</h1>
       </div>
    </header>
 
+   <!-- SOLUTION #1. Use a form to call POST which will send the id 
+        SOLUTION #2. Use similar approach as before and put id in the url-->
+   
    <section>
       <div class="container">
-         {{#each Sections}}
-            <a class="sections button blackText" href="#" id="{{sectionName}}">{{sectionName}}</a>
+         {{#each sections}}
+         <form class="names" action="/items" method="POST">
+            <!--<a class="sections button blackText" href="#" id="{{id}}">{{name}}</a>-->
+               {{#if category}}
+               {{else}}
+               <input id="id" name="id" type="hidden" value="{{id}}"/>
+               <input type="submit" class="sections button blackText" id="{{id}}" name="{{id}}" value="{{name}}"/>
+               {{/if}}
+            </form>
          {{/each}}
       </div>
    </section>
@@ -56,7 +66,7 @@
    <div class="container-fluid">
       <div class="row fixed-bottom">
          <div class="col bottomNav">
-            <a href="sections" class="blackText">
+            <a href="" class="blackText">
                <i class="fa fa-cutlery"></i>
                Sections
             </a>

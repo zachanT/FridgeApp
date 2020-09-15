@@ -4,7 +4,6 @@
 <head>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <script src="js/itemsScreen.js"></script>
-   <!--<script src="js/items.js"></script>-->
 
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -27,13 +26,32 @@
 <body>
    <header id="main-header">
       <div class="container-fluid">
-         <a id="arrow" href="sections"><i class="fa fa-arrow-left"></i></a>
+         <a id="arrow" href="/"><i class="fa fa-arrow-left"></i></a>
       </div>
    </header>
 
-
-
    <div class="container-fluid" id="items">
+   <label for="showShared"><h3>Show Shared:</h3></label> <br />
+      <label class="switch">
+      <input type="checkbox" name="showShared">
+      <span class="slider round"></span>
+   </label>
+      {{#each items}}
+            <div id="{{name}}">
+               {{#if itemname}}
+               {{else}}
+               <h2 class="category-list">{{name}}</h2>
+               {{/if}}
+               {{#if itemname}}
+               <!--<h1 class="tabHeaders listHeader">{{name}}</h1>-->
+               <h2><a href="#" class="item {{shared}}">{{itemname}}<span class="align-right">{{expiration}}</span></a></h2>
+               {{/if}}
+            </div>
+      {{/each}}
+         </div>
+
+
+   <!--<div class="container-fluid" id="items">
       {{#each Sections}}
       <div id="{{sectionName}}">
          <h1 class="tabHeaders listHeader">{{sectionName}}</h1>
@@ -50,26 +68,27 @@
          {{/each}}
       </div>
       {{/each}}
-   </div>
+   </div>-->
 
    <button class="catBtn" id="addCatbtn"><i class="fa fa-plus"></i> Add Category</button><br />
    <button id="addItembtn"><i class="fa fa-plus"></i></button>
+   
    <!--Add item popup-->
    <div id="myModal" class="modal">
       <div class="modal-content-items">
          <span class="close"><i class="fa fa-window-close"></i></span>
          <h1>Add Item</h1>
-         <form id="addItemForm" role="form" method="get" action="/addItem">
+         <form id="addItemForm" role="form" method="POST" action="/addItem">
             <input type="text" placeholder="Bacon" name="itemName" required/><br />
             <label for="category">Category:</label><br />
-            <select name="category" required>
-               {{#each Sections}}
-               {{#each categories}}
-               <option value="{{categoryName}}">{{categoryName}}</option>
-               {{/each}}
+            <select name="category" >
+               {{#each items}}
+               {{#if category}}
+               <option value="{{id}}">{{name}}</option>
+               {{/if}}
                {{/each}}
             </select><br />
-            <input type="text" name="cat" placeholder="New Category" required><br />
+            <!--<input type="text" name="cat" placeholder="New Category" required><br />-->
             <input type="hidden" name="sect" class="sect" value="" />
             <label for="expiration">Expires:</label><br />
             <input type="date" name="expiration" required /><br />
@@ -123,8 +142,8 @@
       <div class="modal-content">
          <span class="close"><i class="fa fa-window-close"></i></span>
          <header class="addItem-header" id="newCat"><h1>New Category</h1></header>
-         <form id="addCatForm" method="get" action="/addCategory">
-            <input type="text" placeholder="Category Name" name="catName" required/><br />
+         <form id="addCatForm" method="post" action="/addCategory">
+            <input type="text" name="catName" placeholder="Category Name" required/><br />
             <input type="hidden" name="sect" class="sect" value="" />
             <input type="submit" id="addCatSubmit" value="Confirm" />
          </form>
@@ -134,7 +153,7 @@
    <div class="container-fluid">
       <div class="row fixed-bottom">
          <div class="col bottomNav">
-            <a href="sections" class="blackText">
+            <a href="/" class="blackText">
                <i class="fa fa-cutlery"></i>
                Sections
             </a>
