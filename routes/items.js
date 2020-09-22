@@ -12,14 +12,15 @@ exports.view = function (request, response) {
    let {id} = request.body;
    if(id){
       localStorage.setItem('sectid', id);
+   } else {
+      id = localStorage.getItem('sectid');
    }
    console.log(request.body);
-   console.log(id);
-   console.log(request.id);
+   console.log(id); //name, id, category, itemname, expiration, notification, quantity, units, shared
    pool.query(`SELECT * FROM categories 
                FULL OUTER JOIN items ON categories.id=items.catid
                WHERE userid=$1
-               AND categories.parentid=$2`, [groupid, (id || localStorage.getItem('sectid'))], (err, results)=>{
+               AND categories.parentid=$2`, [groupid, id], (err, results)=>{  //ORDER BY expiration ASC;
                   if(err){
                      throw err;
                   }
@@ -94,6 +95,7 @@ exports.addItem = function (req, res) {
    let { itemName, category, expiration, notification, shared } = req.body;
    var section = localStorage.getItem('section');
    console.log(section)
+   console.log(req.body);
    console.log(req.body.category)
    console.log(itemName, category, expiration, notification);
    pool.query(`INSERT INTO items (catid, itemname, expiration, notification, shared)

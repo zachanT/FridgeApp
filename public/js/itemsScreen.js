@@ -2,14 +2,14 @@ var section;
 
 // Call this function when the page loads (the "ready" event)
 $(document).ready(function () {
-   //initializePage();
+   initializePage();
 })
 
 /*
  * Function that is called when the document is ready.
  */
 function initializePage() {
-   var isin = false;
+   /*var isin = false;
    var sections = $('#items').find('div'); //Get all sections
    var url = window.location.href;
 
@@ -26,6 +26,7 @@ function initializePage() {
    }
    section = window.name;
    console.log("Section: " + section);
+   
    //if (section != "All Items") {
       //Loop to remove items that aren't in the current section
       for (var i = 0; i < sections.length; i++) {
@@ -67,14 +68,14 @@ function initializePage() {
    var share = document.getElementsByClassName("on");
    for (var i = 0; i < share.length; i++) {
       share[i].style.display = "none";
-   }
+   }*/
 
    $('input[name=showShared').click(shared);
    $('.sect').val(section);
-   //$('.item').click(itemClick);
+   $('.item').click(itemClick);
    $('.close').click(close);
    $('#addCatbtn').click(analytics);
-   $('#addItemForm').on('submit', typed);
+   //$('#addItemForm').on('submit', typed);
 }
 
 function close(e) {
@@ -114,26 +115,6 @@ function shared(e) {
    }
 }
 
-function confirmItembtn(e) {
-   /*console.log("btn press");
-   e.preventDefault();
-   
-   var item = {
-      "itemName": $('input[name="itemName"]').val(),
-      "section": "Fridge",
-      "category": $('select[name="category"]').val(),
-      "expiration": $('input[name="expiration"]').val(),
-      "notification": $('input[name="notification"]').val(),
-      "shared": "TRUE"
-   }
-
-   data.items.push(item);
-   var modal = document.getElementById("myModal");
-   modal.style.display = "none";
-   document.getElementById("addItemForm").reset();
-   initializePage();*/
-}
-
 function confirmMemberbtn(e) {
    e.preventDefault();
    
@@ -147,20 +128,27 @@ function confirmMemberbtn(e) {
 
 function itemClick(e) {
    e.preventDefault();
-
    var ind;
-   var itemName = e.target.id;
-   console.log("item clicked: " + itemName);
+   var id = e.target.id;
+   console.log("item clicked: " + id);
    var modal = document.getElementById("itemClick");
 
    //$('#itemClickHeader').html(itemName);
-   $('input[name="itemName"]').val(itemName);
+   /*$('input[name="itemName"]').val();
    $('input[name="category"]').val();
    $('input[name="expiration"]').val();
-   $('input[name="notification"]').val();
+   $('input[name="notification"]').val();*/
 
    //Delete item if button is clicked
-   $('#deleteItemBtn').click(deleteItem);
+   $('#deleteItemBtn').click(async function(e)  {
+      const temp = {};
+      temp.id = id;
+      console.log("delete " + id);
+
+      const result = await fetch("http://localhost:3000/items", { method: "DELETE", headers: {"content-type": "application/json"}, body: JSON.stringify(temp)});
+      //result = await results.json();
+      window.location = "/items";
+   });
 
    modal.style.display = "block";
    var span = document.getElementsByClassName("close")[1];
@@ -169,9 +157,10 @@ function itemClick(e) {
    }
 }
 
-function deleteItem(e) {
-   console.log("delete");
-}
+/*function deleteItem(e, id) {
+
+   console.log("delete" + id);
+}*/
 
 window.onload = function () {
 
@@ -205,5 +194,4 @@ window.onload = function () {
       }
    }
 
-   //$("#confirmItembtn").click(confirmItembtn);
 };

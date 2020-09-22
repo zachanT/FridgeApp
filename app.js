@@ -1,3 +1,5 @@
+// https://youtu.be/0JNq46eFuOM?t=2224
+// https://youtu.be/MMOvx38dXz4?t=311
 /**
  * Module dependencies.
  */
@@ -12,6 +14,7 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const flash = require('express-flash');
 const passport = require('passport');
+const cors = require('cors');
 if (typeof localStorage === "undefined" || localStorage === null) {
    var LocalStorage = require('node-localstorage').LocalStorage;
    localStorage = new LocalStorage('./scratch');
@@ -61,6 +64,7 @@ app.use(express.cookieParser('Intro HCI secret key'));
 app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 // development only
 if ('development' == app.get('env')) {
@@ -86,6 +90,7 @@ app.post('/Freezer', items.freezer);
 app.post('/Pantry', items.pantry);
 app.post('/items', items.view);
 app.post('/addItem', items.addItem);
+app.post('/group', group.invite);
 app.post('/', checkNotAuthenticated, addSection.addSection);
 app.post('/register', async (req, res) => {
    let { name, email, password, cpassword} = req.body;
@@ -155,6 +160,65 @@ app.post('/login', passport.authenticate('local', {
    console.log(req.user);
 });
 
+//Update tables
+/*app.put('/items/:id', async(req, res) => {
+   const {id} = req.params;
+   pool.query(`UPDATE items SET columnstoupdate = $1
+               WHERE itemid=$2`, [stuff, id], (err, results) = {
+      if(err) {
+         throw err;
+      }
+
+   })
+})*/
+
+//Delete from tables
+app.delete('/items', async (req, res) => {
+   let result = {};
+   try {
+      console.log("DELETE");
+      var id = req.body.id;
+      console.log(id);
+
+      result.success = await deleteItem(id);
+      
+   } catch(e) {
+      result.success = false;
+   } finally {
+      res.setHeader("content-type", "application/json")
+      res.send(JSON.stringify(result))
+      //res.redirect('/items');
+   }
+  
+})
+
+/*app.delete('/items/:id', async (req, res) => {
+   try {
+      const { id } = req.params;
+      const deleted = await pool.query(`DELETE FROM items WHERE itemid=$1`, [id]);
+      
+   } catch (err) {
+      console.log(err.message);
+   }
+})*/
+
+app.delete('/shoppingList', async (req, res) => {
+   let result = {};
+   try {
+      console.log("DELETE");
+      var id = req.body.id;
+      console.log(id);
+
+      result.success = await deleteListItem(id);
+      
+   } catch(e) {
+      result.success = false;
+   } finally {
+      res.setHeader("content-type", "application/json")
+      res.send(JSON.stringify(result))
+   }
+})
+
 function checkAuthenticated(req, res, next){
    if(req.isAuthenticated()) {
       return res.redirect('/');
@@ -167,6 +231,26 @@ function checkNotAuthenticated(req, res, next){
       return next();
    }
    res.redirect('/login');
+}
+
+function deleteItem(id) {
+   pool.query(`DELETE FROM items WHERE itemid=$1`, [id], (err, results) => {
+      if(err) {
+         throw err;
+         return false;
+      }
+      return true;
+   })
+}
+
+function deleteListItem(id) {
+   pool.query(`DELETE FROM shoppinglists WHERE listid=$1`, [id], (err, results) => {
+      if(err) {
+         throw err;
+         return false;
+      }
+      return true;
+   })
 }
 
 http.createServer(app).listen(app.get('port'), function(){

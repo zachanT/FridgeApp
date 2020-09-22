@@ -4,7 +4,22 @@ $(document).ready(function () {
 })
 
 function initializePage() {
-   
+   $('.listitem').click(itemClick);
+}
+
+async function itemClick(e) {
+   e.preventDefault();
+   var id = e.target.id;
+   console.log("item clicked: " + id);
+   var modal = document.getElementById("itemClick");
+
+   const temp = {};
+   temp.id = id;
+   console.log("delete " + id);
+
+   const result = await fetch("http://localhost:3000/shoppingList", { method: "DELETE", headers: {"content-type": "application/json"}, body: JSON.stringify(temp)});
+   //result = await results.json();
+   window.location = "/shoppingList";
 }
 
 function confirmItembtn(e) {
@@ -26,6 +41,7 @@ function confirmItembtn(e) {
 window.onload = function () {
    var modal = document.getElementById("myModal");
    var btn = document.getElementById("addSectionbtn");
+   var span = document.getElementsByClassName("close")[0];
    $("#confirmItembtn").click(confirmItembtn);
 
    btn.onclick = function () {

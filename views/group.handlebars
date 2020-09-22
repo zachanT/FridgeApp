@@ -16,27 +16,36 @@
    <header id="main-header">
       <div class="container">
          <h1 class="tabHeaders listHeader">Group</h1>
+         <ul>
+            {{#each group}}
+            {{#if message}}
+               <li>{{message}}</li>
+            {{/if}}
+            {{/each}}
+         </ul>
       </div>
    </header>
 
    <section>
       <div class="container-fluid">
          {{#each group}}
+            {{#if message}}
+            {{else}}
             <h1 class="member-group" id="sections"><i class="fa fa-user"></i> {{name}}</h1>
+            {{/if}}
          {{/each}}
       </div>
    </section>
-
    <button id="addSectionbtn"><i class="fa fa-plus"></i></button>
 
-   <!--Add section popup-->
+   <!--Invite Member popup-->
    <div id="myModal" class="modal">
       <div class="modal-content">
          <span class="close"><i class="fa fa-window-close"></i></span>
-         <h1>Add Member</h1>
-         <form id="addMemberForm" role="form" method="get" action="/addMember">
-            <input type="text" id="memberName" placeholder="John Smith" name="memberName" required />
-            <input class="adding" type="submit" id="confirmSectionbtn" value="Confirm" />
+         <h1>Invite Member</h1>
+         <form id="addMemberForm" role="form" method="post" action="/group">
+            <input type="email" id="email" placeholder="Enter Email" name="email" required />
+            <input class="adding" type="submit" id="confirmSectionbtn" value="Invite" />
          </form>
          <!--<button id="confirmSectionbtn">Add Section</button>-->
       </div>

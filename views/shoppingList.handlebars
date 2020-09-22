@@ -6,7 +6,7 @@
 
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <script src="/js/javascript.js"></script>
-<!--    <script src="/js/shoppingList.js"></script> -->
+   <script src="/js/shoppingList.js"></script>
    <!-- <link href="/css/style.css" rel="stylesheet"/> -->
 
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -22,9 +22,15 @@
 
    <div class="container-fluid">
             <h1 class="member-list">{{list.[0].name}}</h1>
+            <!--<form id="">
                {{#each list}}
-                  <h2>- {{itemname}}</h2>
+               <input type="checkbox" id="{{listid}}" name="{{itemname}}" value="{{itemname}}" />
+               <label for="{{id}}">{{itemname}}</label><br />
                {{/each}}
+            </form>-->
+            {{#each list}}
+               <h2 class="listitem" id="{{id}}">- {{itemname}}</h2>
+            {{/each}}
    </div>
 
 
@@ -37,12 +43,6 @@
          <h1>Add Item</h1>
          <form id="addItem" method="get" action="/addToList">
             <input type="text" placeholder="Apples" name="itemName" required /><br />
-            <label for="member">Member:</label><br />
-            <select name="member">
-               {{#each shoppingLists}}
-                  <option value="{{memberName}}">{{memberName}}</option>
-               {{/each}}
-            </select><br />
             <input class="adding" type="submit" id="confirmItembtn" value="Confirm" />
          </form>
          <!--<button id="confirmItembtn">Add Item</button>-->

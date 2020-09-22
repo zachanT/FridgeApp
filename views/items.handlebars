@@ -9,6 +9,10 @@
    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
    <link href="/css/improved.css" rel="stylesheet" />
    
+   <script>
+      
+   </script>
+
    <!-- Google Analytics -->
    <script>
    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -38,39 +42,13 @@
    </label>
       {{#each items}}
             <div id="{{name}}">
-               {{#if itemname}}
-               {{else}}
-               <h2 class="category-list">{{name}}</h2>
-               {{/if}}
-               {{#if itemname}}
                <!--<h1 class="tabHeaders listHeader">{{name}}</h1>-->
-               <h2><a href="#" class="item {{shared}}">{{itemname}}<span class="align-right">{{expiration}}</span></a></h2>
-               {{/if}}
+               <h2 class="category-list" id="{{catid}}">{{name}}</h2>
+               <h2><a href="#" class="item {{shared}}" id="{{itemid}}">{{itemname}}<span class="align-right">{{expiration}}</span></a></h2>
             </div>
       {{/each}}
          </div>
 
-
-   <!--<div class="container-fluid" id="items">
-      {{#each Sections}}
-      <div id="{{sectionName}}">
-         <h1 class="tabHeaders listHeader">{{sectionName}}</h1>
-            <label for="showShared"><h3>Show Shared:</h3></label> <br />
-               <label class="switch">
-               <input type="checkbox" name="showShared">
-               <span class="slider round"></span>
-            </label>
-            {{#each categories}}
-               <h2 class="category-list">{{categoryName}}</h2>
-            {{#each items}}
-               <h2><a href="#" class="item {{shared}}">{{itemName}}<span class="align-right">{{expiration}}</span></a></h2>
-            {{/each}}
-         {{/each}}
-      </div>
-      {{/each}}
-   </div>-->
-
-   <button class="catBtn" id="addCatbtn"><i class="fa fa-plus"></i> Add Category</button><br />
    <button id="addItembtn"><i class="fa fa-plus"></i></button>
    
    <!--Add item popup-->
@@ -78,10 +56,11 @@
       <div class="modal-content-items">
          <span class="close"><i class="fa fa-window-close"></i></span>
          <h1>Add Item</h1>
-         <form id="addItemForm" role="form" method="POST" action="/addItem">
+         <button class="catBtn" id="addCatbtn"><i class="fa fa-plus"></i> Add Category</button><br />
+         <form method="POST" id="addItemForm" role="form" action="addItem">
             <input type="text" placeholder="Bacon" name="itemName" required/><br />
             <label for="category">Category:</label><br />
-            <select name="category" >
+            <select class="category" name="category" id="category">
                {{#each items}}
                {{#if category}}
                <option value="{{id}}">{{name}}</option>
