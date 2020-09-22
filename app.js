@@ -1,5 +1,3 @@
-// https://youtu.be/0JNq46eFuOM?t=2224
-// https://youtu.be/MMOvx38dXz4?t=311
 /**
  * Module dependencies.
  */
