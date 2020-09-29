@@ -13,10 +13,8 @@ const session = require('express-session');
 const flash = require('express-flash');
 const passport = require('passport');
 const cors = require('cors');
-if (typeof localStorage === "undefined" || localStorage === null) {
-   var LocalStorage = require('node-localstorage').LocalStorage;
-   localStorage = new LocalStorage('./scratch');
-}
+const crypto = require('crypto');
+const webpush = require('web-push');
 
 require("dotenv").config();
 
@@ -34,23 +32,32 @@ app.use(passport.session());
 
 app.use(flash());
 
+//Variables
 var login = require('./routes/login');
 var logout = require('./routes/logout');
 var register = require('./routes/register');
 var addSection = require('./routes/addSection');
 var items = require('./routes/items');
-var addItem = require('./routes/addItem');
-var deleteItem = require('./routes/deleteItem');
 var addCategory = require('./routes/addCategory')
 var group = require('./routes/group');
 var addMember = require('./routes/addMember');
 var shoppingList = require('./routes/shoppingList');
 var sections = require('./routes/section');
 var addToList = require('./routes/addToList');
+var forgot = require('./routes/forgot');
+var reset = require('./routes/reset');
+var publicVapidKeys = 'BO2WyM2viPQsPp8cwRS7ulL7ANw07BQpsYkD_cLpmUPxYS2QPZW6Ilb-RDCiQLUM0josK97O8MlLDRwFj3LW89E';
+var privateVapidKeys = 'BwHuUOcOmVYN5u4qSzVGPSozwOqUhar05nkB65LSLGs';
+
+webpush.setVapidDetails('mailto:test@test.com', publicVapidKeys, privateVapidKeys);
+
+/*let sub = {};
+webpush.sendNotification(sub, 'test message');*/
 
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'views')));
 app.engine('handlebars', handlebars());
 app.set('view engine', 'handlebars');
 app.use(express.favicon());
@@ -58,7 +65,7 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(express.methodOverride());
-app.use(express.cookieParser('Intro HCI secret key'));
+app.use(express.cookieParser('secret key'));
 app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -73,7 +80,6 @@ if ('development' == app.get('env')) {
 app.get('/', checkNotAuthenticated, sections.view);
 app.get('/addSection', checkNotAuthenticated, addSection.addSection);
 app.get('/items', checkNotAuthenticated, items.view);
-app.get('/deleteItem', deleteItem.deleteItem);
 app.post('/addCategory', items.addCategory);
 app.get('/group', checkNotAuthenticated, group.view);
 app.get('/addMember', addMember.addMember);
@@ -82,14 +88,16 @@ app.get('/login', checkAuthenticated, login.view);
 app.get('/register', checkAuthenticated, register.view);
 app.get('/addToList', addToList.addToList);
 app.get('/logout', logout.logout);
+app.get('/forgot', forgot.view);
+app.get('/reset/:token', reset.view);
 
-app.post('/Fridge', items.fridge);
-app.post('/Freezer', items.freezer);
-app.post('/Pantry', items.pantry);
 app.post('/items', items.view);
 app.post('/addItem', items.addItem);
 app.post('/group', group.invite);
 app.post('/', checkNotAuthenticated, addSection.addSection);
+app.post('/shoppingList', shoppingList.addToList);
+app.post('/forgot', forgot.forgotpw);
+app.post('/reset/:token', reset.resetpw);
 app.post('/register', async (req, res) => {
    let { name, email, password, cpassword} = req.body;
 
@@ -149,6 +157,14 @@ app.post('/register', async (req, res) => {
       })
    }
 });
+app.post('/subscribe', (req, res) => {
+   const subscription = req.body;
+   localStorage.setItem('subscription', JSON.stringify(req.body));
+   res.status(201).json({});
+   /*const payload = JSON.stringify({ title : ('Push test ')});
+   console.log(subscription.endpoint);
+   webpush.sendNotification(subscription, payload).catch(err => console.error(err));*/
+});
 
 app.post('/login', passport.authenticate('local', {
    successRedirect: '/',
@@ -169,6 +185,7 @@ app.post('/login', passport.authenticate('local', {
 
    })
 })*/
+app.post('/invited', group.respond);
 
 //Delete from tables
 app.delete('/items', async (req, res) => {

@@ -2,7 +2,7 @@ const { pool } = require('../DBconfig');
  
 exports.view = function (request, response) {
    var groupid = localStorage.getItem('groupid');
-   pool.query(`SELECT name FROM users
+   pool.query(`SELECT name, inviteid FROM users
                WHERE groupid = $1`, [groupid], (err, results) => {
                   if(err){
                      throw err;
@@ -36,7 +36,6 @@ exports.invite = function (request, response) {
                   console.log(results.rows);
                   response.render('group', {'group' : results.rows});
                })
-         //response.render('group', {msg});
       } else {
          console.log(results.rows);
          pool.query(`UPDATE users SET inviteid = $1 WHERE id = $2`, [groupid, results.rows[0].id], (err, results) => {
@@ -57,6 +56,35 @@ exports.invite = function (request, response) {
                })
          })
       }
+   })
+}
+
+exports.respond = function (request, response) {
+   console.log("RESPONDING TO INVITE");
+   var res = request.body.response;
+   var userid = localStorage.getItem('userid');
+   console.log(userid);
+   console.log(res);
+   if (res == "Accept") {
+      pool.query(`SELECT inviteid FROM users WHERE id = $1`, [userid], (err, results) => {
+         if (err) {
+            throw err;
+         }
+         console.log(results.rows);
+         pool.query(`UPDATE users SET groupid = $1 WHERE id = $2`, [results.rows[0].inviteid, userid], (err, results) => {
+            if (err) {
+               throw err;
+            }
+         });
+      });
+   } else if (res == "Decline") {
+
+   }
+   pool.query(`UPDATE users SET inviteid = NULL WHERE id = $1`, [userid], (err, results) => {
+      if (err) {
+         throw err;
+      }
+      response.redirect('/group');
    })
 }
 

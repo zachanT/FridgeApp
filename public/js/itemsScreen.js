@@ -1,4 +1,4 @@
-var section;
+
 
 // Call this function when the page loads (the "ready" event)
 $(document).ready(function () {
@@ -9,69 +9,8 @@ $(document).ready(function () {
  * Function that is called when the document is ready.
  */
 function initializePage() {
-   /*var isin = false;
-   var sections = $('#items').find('div'); //Get all sections
-   var url = window.location.href;
-
-   url = url.substring(url.lastIndexOf("/"));
-   console.log(url.substring(0, 4));
-   if (url.substring(0, 4) != "/add") {
-      section = window.location.href; //Current section passed through url from '/sections' page
-
-      //reformat from the url to only get section
-      var ind = section.lastIndexOf('#') + 1;
-      section = section.substring(ind);
-      section = section.replace("%20", " ");
-      window.name = section;
-   }
-   section = window.name;
-   console.log("Section: " + section);
-   
-   //if (section != "All Items") {
-      //Loop to remove items that aren't in the current section
-      for (var i = 0; i < sections.length; i++) {
-         console.log("js section: " + sections[i]);
-         if (sections[i].id != section) {
-            document.getElementById(sections[i].id).innerHTML = "";
-            //$('#' + sections[i].id).html("");
-         }
-      }
-
-      //Removes category options that aren't in the section
-      var options = $('select[name="category"] option'); //All category options in list
-      //var categories = $("#" + section + " h2").toArray(); //Categories in the section
-      var categories = document.getElementById(section).getElementsByClassName("category-list");
-      console.log("this: " + categories);
-      for (var i = 0; i < options.length; i++) {
-         for (var j = 0; j < categories.length; j++) {
-            console.log("o: " + options[i].value + " c: " + categories[j].innerText); //debug prints
-            console.log(options[i].value == categories[j].innerText);                 //debug prints
-            if (options[i].value == "select" || options[i].value == categories[j].innerText) {
-               isin = true;
-               break;
-            }
-         }
-         if (!isin) {
-            $('select option[value="' + options[i].value + '"]').remove();
-         }
-         isin = false;
-      }
-	  $('select[name="category"]').prop("selectedIndex", -1);
-	  var $inputs = $('select[name=category],input[name=cat]');
-	  $inputs.on('input', function () {
-        // Set the required property of the other input to false if this input is not empty.
-        $inputs.not(this).prop('required', !$(this).val().length);
-    });
-   //}
-
-   // hide shared items from other people
-   var share = document.getElementsByClassName("on");
-   for (var i = 0; i < share.length; i++) {
-      share[i].style.display = "none";
-   }*/
 
    $('input[name=showShared').click(shared);
-   $('.sect').val(section);
    $('.item').click(itemClick);
    $('.close').click(close);
    $('#addCatbtn').click(analytics);
@@ -79,15 +18,15 @@ function initializePage() {
 }
 
 function close(e) {
-	e.preventDefault();
-	
-	var modal = document.getElementById("myModal");
-    var itemInfo = document.getElementById("itemClick");
-    var catModal = document.getElementById("newCat");
+   e.preventDefault();
+
+   var modal = document.getElementById("myModal");
+   var itemInfo = document.getElementById("itemClick");
+   var catModal = document.getElementById("newCat");
    
-    modal.style.display = "none";
-    itemInfo.style.display = "none";
-    catModal.style.display = "none";
+   modal.style.display = "none";
+   itemInfo.style.display = "none";
+   catModal.style.display = "none";
 }
 
 function analytics(e) {
@@ -195,3 +134,17 @@ window.onload = function () {
    }
 
 };
+
+/*addEventListener('load', async() => {
+   let sw = await navigator.serviceWorker.register('./sw.js');
+   console.log(sw);
+});
+
+async function subscribe() {
+   let sw = await navigator.serviceWorker.ready;
+   let push await sw.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: 'BO2WyM2viPQsPp8cwRS7ulL7ANw07BQpsYkD_cLpmUPxYS2QPZW6Ilb-RDCiQLUM0josK97O8MlLDRwFj3LW89E'
+   })
+   console.log(JSON.stringify(push));
+}*/

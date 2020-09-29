@@ -1,27 +1,16 @@
+
+
 $(document).ready(function () {
    initializePage();
 })
 
 function initializePage() {
-   //$('.sections').click(SectionClick);
-
    var ids = [];
    var temp = $('.names').each(function () {
       ids.push($(this).attr('action').substring(1));
    });
    console.log(JSON.parse(JSON.stringify(ids)));
    localStorage.setItem('ids', JSON.stringify(ids));
-   return false;
-}
-
-function SectionClick(e) {
-   e.preventDefault();
-   localStorage.setItem('id', e.target.id);
-   $('#id').val(e.target.id);
-
-   //window.document.location = ('/items', e.target.id);
-   //section = e.target.id;
-   //window.location.href = 'items' + '#' + e.target.id;
    return false;
 }
 
@@ -62,3 +51,46 @@ window.onload = function () {
       }
    }
 };
+
+if ("serviceWorker" in navigator) {
+   send().catch(err => console.error(err));
+}
+
+//Register SW, Register Push, Send Push
+async function send() {
+   console.log('Registering service worker...');
+   const register = await navigator.serviceWorker.register('/sw.js');
+   console.log('Service worker registered.');
+
+   console.log('Registering push...');
+   const sub = await register.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: urlBase64ToUint8Array('BO2WyM2viPQsPp8cwRS7ulL7ANw07BQpsYkD_cLpmUPxYS2QPZW6Ilb-RDCiQLUM0josK97O8MlLDRwFj3LW89E')
+   });
+
+   console.log('Push registered');
+
+   //Send push notification
+   console.log('Sending push...');
+   await fetch('/subscribe', {
+      method: 'POST',
+      body: JSON.stringify(sub),
+      headers: {'content-type': 'application/json'}
+   });
+   console.log('Push sent.');
+}
+
+function urlBase64ToUint8Array(base64String) {
+   const padding = "=".repeat((4 - base64String.length % 4) % 4);
+   const base64 = (base64String + padding)
+     .replace(/\-/g, "+")
+     .replace(/_/g, "/");
+
+   const rawData = window.atob(base64);
+   const outputArray = new Uint8Array(rawData.length);
+
+   for (let i = 0; i < rawData.length; ++i) {
+      outputArray[i] = rawData.charCodeAt(i);
+   }
+   return outputArray;
+}

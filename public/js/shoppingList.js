@@ -42,7 +42,7 @@ window.onload = function () {
    var modal = document.getElementById("myModal");
    var btn = document.getElementById("addSectionbtn");
    var span = document.getElementsByClassName("close")[0];
-   $("#confirmItembtn").click(confirmItembtn);
+   //$("#confirmItembtn").click(confirmItembtn);
 
    btn.onclick = function () {
       modal.style.display = "block";

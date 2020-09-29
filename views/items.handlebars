@@ -10,7 +10,6 @@
    <link href="/css/improved.css" rel="stylesheet" />
    
    <script>
-      
    </script>
 
    <!-- Google Analytics -->
@@ -40,11 +39,14 @@
       <input type="checkbox" name="showShared">
       <span class="slider round"></span>
    </label>
-      {{#each items}}
+      <!--<button onclick="subscribe()">Receive notifications?</button>-->
+      {{#each allItems}}
             <div id="{{name}}">
                <!--<h1 class="tabHeaders listHeader">{{name}}</h1>-->
-               <h2 class="category-list" id="{{catid}}">{{name}}</h2>
+               <h2 class="category-list" id="">{{name}}</h2>
+               {{#each items}}
                <h2><a href="#" class="item {{shared}}" id="{{itemid}}">{{itemname}}<span class="align-right">{{expiration}}</span></a></h2>
+               {{/each}}
             </div>
       {{/each}}
          </div>
@@ -61,10 +63,12 @@
             <input type="text" placeholder="Bacon" name="itemName" required/><br />
             <label for="category">Category:</label><br />
             <select class="category" name="category" id="category">
+               {{#each allItems}}
                {{#each items}}
                {{#if category}}
                <option value="{{id}}">{{name}}</option>
                {{/if}}
+               {{/each}}
                {{/each}}
             </select><br />
             <!--<input type="text" name="cat" placeholder="New Category" required><br />-->
@@ -72,7 +76,7 @@
             <label for="expiration">Expires:</label><br />
             <input type="date" name="expiration" required /><br />
             <label for="notification">Notification:</label><br />
-            <input type="text" placeholder="3 Days" name="notification" /><br />
+            <input type="datetime-local" placeholder="3" name="notification" /><br />
             <!--<label for="quantity">Quantity:</label><br />
             <input type="text" placeholder="12" name="quantity" /><br />
             <label for="units">Units:</label><br />

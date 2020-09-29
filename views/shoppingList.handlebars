@@ -21,15 +21,17 @@
    </header>
 
    <div class="container-fluid">
-            <h1 class="member-list">{{list.[0].name}}</h1>
+            {{#each lists}}
+            <h1 class="member-list">{{name}}</h1>
             <!--<form id="">
                {{#each list}}
                <input type="checkbox" id="{{listid}}" name="{{itemname}}" value="{{itemname}}" />
                <label for="{{id}}">{{itemname}}</label><br />
                {{/each}}
             </form>-->
-            {{#each list}}
+               {{#each items}}
                <h2 class="listitem" id="{{id}}">- {{itemname}}</h2>
+               {{/each}}
             {{/each}}
    </div>
 
@@ -41,11 +43,10 @@
       <div class="modal-content modal-content-list">
          <span class="close"><i class="fa fa-window-close"></i></span>
          <h1>Add Item</h1>
-         <form id="addItem" method="get" action="/addToList">
+         <form id="addItem" action="/shoppingList" method="POST" >
             <input type="text" placeholder="Apples" name="itemName" required /><br />
             <input class="adding" type="submit" id="confirmItembtn" value="Confirm" />
          </form>
-         <!--<button id="confirmItembtn">Add Item</button>-->
       </div>
    </div>
 

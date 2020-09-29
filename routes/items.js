@@ -3,7 +3,9 @@ if (typeof localStorage === "undefined" || localStorage === null) {
    localStorage = new LocalStorage('./scratch');
 }
 
+const schedule = require('node-schedule');
 const {pool} = require('../DBconfig');
+const webpush = require('web-push');
 
 exports.view = function (request, response) {
    console.log("view");
@@ -25,85 +27,67 @@ exports.view = function (request, response) {
                      throw err;
                   }
                   console.log(results.rows);
-                  response.render('items', {"items" : results.rows});
+                  var categories = [];
+                  for(var i = 0; i < results.rows.length; i++) {
+                     categories.push(results.rows[i].name);
+                  }
+                  Array.prototype.contains = function(v) {
+                     for (var i = 0; i < this.length; i++) {
+                        if (this[i] === v) return true;
+                     }
+                     return false;
+                  };
+
+                  Array.prototype.unique = function() {
+                     var arr = [];
+                     for (var i = 0; i < this.length; i++) {
+                        if (!arr.contains(this[i])) {
+                           arr.push(this[i]);
+                        }
+                     }
+                     return arr;
+                  }
+                  categories = categories.unique();
+                  console.log(categories);
+                  var allItems = {"allItems": []};
+                  for (i = 0; i < categories.length; i++) {
+                     var category = {
+                        "name": categories[i],
+                        "items": []
+                     }
+                     for (var j = 0; j < results.rows.length; j++) {
+                        if (results.rows[j].name == categories[i]) {
+                           category.items.push(results.rows[j]);
+                        }
+                     }
+                     allItems.allItems.push(category);
+                  }
+                  console.log(allItems);
+                  response.render('items', allItems);
                })
-}
 
-exports.fridge = function (request, response) {
-   console.log("reaches here!!");
-   var userid = localStorage.getItem('id');
-   console.log(userid);
-   var id = (userid-1)*3+1;
-   console.log(id);
-   localStorage.setItem('section', id);
-   pool.query(`SELECT * FROM categories 
-               FULL OUTER JOIN items ON categories.id=items.id
-               WHERE userid=$1
-               AND categories.id=$2`, [userid, id], (err, results)=>{
-      if(err){
-         throw err;
-      }
-      console.log(results.rows);
-      response.render('items', {"items": results.rows});
-   })
-
-   /*console.log(data);
-   //data['Sections'][0]['categories'][1]['items'].push(test);
-   response.render('items', data);*/
-}
-
-exports.freezer = function (request, response) {
-   console.log("reaches here!!");
-   var userid = localStorage.getItem('id');
-   console.log(userid);
-   var id = (userid-1)*3+2;
-   console.log(id);
-   localStorage.setItem('section', id);
-   pool.query(`SELECT * FROM categories 
-               FULL OUTER JOIN items ON categories.id=items.id
-               WHERE userid=$1
-               AND categories.id=$2`, [userid, id], (err, results)=>{
-      if(err){
-         throw err;
-      }
-      console.log(results.rows);
-      response.render('items', {"items": results.rows});
-   })
-}
-
-exports.pantry = function (request, response) {
-   console.log("reaches here!!");
-   var userid = localStorage.getItem('id');
-   console.log(userid);
-   var id = (userid-1)*3+3;
-   console.log(id);
-   localStorage.setItem('section', id);
-   pool.query(`SELECT * FROM categories 
-               FULL OUTER JOIN items ON categories.id=items.id
-               WHERE userid=$1
-               AND categories.id=$2`, [userid, id], (err, results)=>{
-      if(err){
-         throw err;
-      }
-      console.log(results.rows);
-      response.render('items', {"items": results.rows});
-   })
 }
 
 exports.addItem = function (req, res) {
    console.log("adding item");
    let { itemName, category, expiration, notification, shared } = req.body;
    var section = localStorage.getItem('section');
-   console.log(section)
+   /*console.log(section)
    console.log(req.body);
    console.log(req.body.category)
-   console.log(itemName, category, expiration, notification);
+   console.log(itemName, category, expiration, notification);*/
    pool.query(`INSERT INTO items (catid, itemname, expiration, notification, shared)
                VALUES ($1, $2, $3, $4, $5)`, 
                [category, itemName, expiration, notification, shared], (err, results)=>{
                   if(err){
                      throw err;
                   }
+                  var sub = JSON.parse( localStorage.getItem('subscription'));
+                  var date = new Date(notification);
+                  var j = schedule.scheduleJob(date, function(){
+                     const payload = JSON.stringify({ title : (itemName + ' expires on ' + expiration)});
+                     webpush.sendNotification(sub, payload).catch(err => console.error(err))
+                  });
                   res.redirect('/items');
                })
 }
@@ -119,9 +103,4 @@ exports.addCategory = function (req, res) {
                   }
                   res.redirect('/items');
                })
-}
-
-exports.viewAlt = function (request, response) {
-	data['viewAlt'] = true;
-	response.render('items', data);
 }

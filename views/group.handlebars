@@ -51,6 +51,22 @@
       </div>
    </div>
 
+   <!--Invited Popup Module-->
+   {{#each group}}
+   {{#if inviteid}}
+   <div id="invited" class="modal">
+      <div class="modal-content">
+         <span class="close" id="x"><i class="fa fa-window-close"></i></span>
+         <h1> Someone invited you to their group</h1>
+         <form id="invite" role="form" method="post" action="/invited">
+            <input type="submit" name="response" id="accept" value="Accept" />
+            <input type="submit" name="response" id="decline" value="Decline" />
+         </form>
+      </div>
+   </div>
+   {{/if}}
+   {{/each}}
+
    <!-- Nav bar -->
    <div class="container-fluid">
       <div class="row fixed-bottom">
