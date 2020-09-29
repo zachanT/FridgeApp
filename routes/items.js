@@ -72,10 +72,6 @@ exports.addItem = function (req, res) {
    console.log("adding item");
    let { itemName, category, expiration, notification, shared } = req.body;
    var section = localStorage.getItem('section');
-   /*console.log(section)
-   console.log(req.body);
-   console.log(req.body.category)
-   console.log(itemName, category, expiration, notification);*/
    pool.query(`INSERT INTO items (catid, itemname, expiration, notification, shared)
                VALUES ($1, $2, $3, $4, $5)`, 
                [category, itemName, expiration, notification, shared], (err, results)=>{

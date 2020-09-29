@@ -51,9 +51,6 @@ var privateVapidKeys = 'BwHuUOcOmVYN5u4qSzVGPSozwOqUhar05nkB65LSLGs';
 
 webpush.setVapidDetails('mailto:test@test.com', publicVapidKeys, privateVapidKeys);
 
-/*let sub = {};
-webpush.sendNotification(sub, 'test message');*/
-
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
