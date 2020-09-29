@@ -229,6 +229,11 @@ app.delete('/shoppingList', async (req, res) => {
       res.setHeader("content-type", "application/json")
       res.send(JSON.stringify(result))
    }
+});
+
+//Catch all
+app.get("*", (req, res) => {
+   res.sendFile(path.join(__dirname, "views/login"));
 })
 
 function checkAuthenticated(req, res, next){

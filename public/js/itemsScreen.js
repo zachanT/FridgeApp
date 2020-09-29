@@ -84,7 +84,7 @@ function itemClick(e) {
       temp.id = id;
       console.log("delete " + id);
 
-      const result = await fetch("http://localhost:3000/items", { method: "DELETE", headers: {"content-type": "application/json"}, body: JSON.stringify(temp)});
+      const result = await fetch("/items", { method: "DELETE", headers: {"content-type": "application/json"}, body: JSON.stringify(temp)});
       //result = await results.json();
       window.location = "/items";
    });
