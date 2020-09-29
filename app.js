@@ -232,9 +232,9 @@ app.delete('/shoppingList', async (req, res) => {
 });
 
 //Catch all
-app.get("*", (req, res) => {
+/*app.get("*", (req, res) => {
    res.sendFile(path.join(__dirname, "views/login"));
-})
+})*/
 
 function checkAuthenticated(req, res, next){
    if(req.isAuthenticated()) {
