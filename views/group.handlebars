@@ -6,7 +6,6 @@
 
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <script src="/js/javascript.js"></script>
-  <!--  <link href="/css/style.css" rel="stylesheet" /> -->
 
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -39,7 +38,7 @@
    <button id="addSectionbtn" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i></button>
 
    <!--Invite Member popup-->
-   <div id="myModal" class="modal">
+   <div id="myModal" class="modal fade">
       <div class="modal-dialog" role="document">
          <div class="modal-content">
             <div class="modal-header">
@@ -63,13 +62,19 @@
    {{#each group}}
    {{#if inviteid}}
    <div id="invited" class="modal">
-      <div class="modal-content">
-         <span class="close" id="x"><i class="fa fa-window-close"></i></span>
-         <h1> Someone invited you to their group</h1>
-         <form id="invite" role="form" method="post" action="/invited">
-            <input type="submit" name="response" id="accept" value="Accept" />
-            <input type="submit" name="response" id="decline" value="Decline" />
-         </form>
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h1> Someone invited you to their group</h1>
+               <span class="close" id="x" data-dismiss="modal" aria-label="Close"><i class="fa fa-window-close" aria-hidden="true"></i></span>
+            </div>
+            <div class="modal-body">
+               <form id="invite" role="form" method="post" action="/invited">
+                  <input type="submit" name="response" id="accept" class="btn btn-success btn-lg" value="Accept" />
+                  <input type="submit" name="response" id="decline" class="btn btn-danger btn-lg" value="Decline" />
+               </form>
+            </div>
+         </div>
       </div>
    </div>
    {{/if}}

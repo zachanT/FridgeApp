@@ -54,29 +54,12 @@ function shared(e) {
    }
 }
 
-function confirmMemberbtn(e) {
-   e.preventDefault();
-   
-   var modal = document.getElementById("myModal");
-   var name = document.getElementsByName("itemName")[0].value;
-   var category = document.getElementsByName("category")[0].value;
-   var notification = document.getElementsByName("notification")[0].value;
-   addItem(name, "1 day");
-   modal.style.display = "none";
-}
-
 function itemClick(e) {
    e.preventDefault();
    var ind;
    var id = e.target.id;
    console.log("item clicked: " + id);
    var modal = document.getElementById("itemClick");
-
-   //$('#itemClickHeader').html(itemName);
-   /*$('input[name="itemName"]').val();
-   $('input[name="category"]').val();
-   $('input[name="expiration"]').val();
-   $('input[name="notification"]').val();*/
 
    //Delete item if button is clicked
    $('#deleteItemBtn').click(async function(e)  {
@@ -95,11 +78,6 @@ function itemClick(e) {
       modal.style.display = "none";
    }
 }
-
-/*function deleteItem(e, id) {
-
-   console.log("delete" + id);
-}*/
 
 window.onload = function () {
 
@@ -134,17 +112,3 @@ window.onload = function () {
    }
 
 };
-
-/*addEventListener('load', async() => {
-   let sw = await navigator.serviceWorker.register('./sw.js');
-   console.log(sw);
-});
-
-async function subscribe() {
-   let sw = await navigator.serviceWorker.ready;
-   let push await sw.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: 'BO2WyM2viPQsPp8cwRS7ulL7ANw07BQpsYkD_cLpmUPxYS2QPZW6Ilb-RDCiQLUM0josK97O8MlLDRwFj3LW89E'
-   })
-   console.log(JSON.stringify(push));
-}*/

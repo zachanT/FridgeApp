@@ -239,6 +239,10 @@ input:checked + .slider:before {
    background: rgba(0, 0, 0, 0.5)
 }
 
+#invited {
+   background: rgba(0, 0, 0, 0.5);
+}
+
 .link {
    font-size: 1.8em;
 }
@@ -253,4 +257,13 @@ input:checked + .slider:before {
 
 .form-control {
    font-size: 1.8em;
+}
+
+input.largebox {
+   width: 2em;
+   height: 2em;
+}
+
+.shoplist {
+   font-size: 3em;
 }

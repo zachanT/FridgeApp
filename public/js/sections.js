@@ -1,19 +1,3 @@
-
-
-$(document).ready(function () {
-   initializePage();
-})
-
-function initializePage() {
-   var ids = [];
-   var temp = $('.names').each(function () {
-      ids.push($(this).attr('action').substring(1));
-   });
-   console.log(JSON.parse(JSON.stringify(ids)));
-   localStorage.setItem('ids', JSON.stringify(ids));
-   return false;
-}
-
 window.onload = function () {
 
    var invited = document.getElementById("invited");
@@ -21,18 +5,9 @@ window.onload = function () {
 
    invited.style.display = "block";
 
-   // Get the button that opens the modal
-   var btn = document.getElementById("addSectionbtn");
-   //document.getElementById("addSectionbtn").onclick = function () { myfunction() };
-
    // Get the <span> element that closes the modal
    var span = document.getElementsByClassName("close")[0];
    var x = document.getElementById("x");
-
-   // When the user clicks the button, open the modal 
-   btn.onclick = function () {
-      modal.style.display = "block";
-   }
 
    // When the user clicks on <span> (x), close the modal
    span.onclick = function () {

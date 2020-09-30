@@ -30,22 +30,20 @@
    </header>
 
    <div class="container-fluid" id="items">
-   <label for="showShared"><h3>Show Shared:</h3></label> <br />
-      <label class="switch">
-      <input type="checkbox" name="showShared">
-      <span class="slider round"></span>
-   </label>
-      <!--<button onclick="subscribe()">Receive notifications?</button>-->
-      {{#each allItems}}
-            <div id="{{name}}">
-               <!--<h1 class="tabHeaders listHeader">{{name}}</h1>-->
-               <h2 class="category-list" id="">{{name}}</h2>
-               {{#each items}}
-               <h2><a href="#" class="item {{shared}}" id="{{itemid}}">{{itemname}}<span class="align-right">{{expiration}}</span></a></h2>
-               {{/each}}
-            </div>
-      {{/each}}
-         </div>
+      <!--<label for="showShared"><h3>Show Shared:</h3></label> <br />
+         <label class="switch">
+         <input type="checkbox" name="showShared">
+         <span class="slider round"></span>
+      </label>-->
+         {{#each allItems}}
+               <div id="{{name}}">
+                  <h2 class="category-list" id="">{{name}}</h2>
+                  {{#each items}}
+                  <h2><a href="#" class="item {{shared}}" id="{{itemid}}">{{itemname}}<span class="align-right">{{expiration}}</span></a></h2>
+                  {{/each}}
+               </div>
+         {{/each}}
+   </div>
 
    <button id="addItembtn" type="button" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus"></i></button>
 
@@ -148,6 +146,7 @@
          </div>
       </div>
    </div>
+
    <!--New Category popup-->
    <div id="catForm" class="modal fade">
       <div class="modal-dialog" role="document">
