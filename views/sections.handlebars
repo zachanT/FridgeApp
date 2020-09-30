@@ -13,15 +13,12 @@
 
 </head>
 <body>
-   <div id="logout"><a href="/logout" class="blackText">Logout</a></div>
+   <div id="logout" class="btn"><a href="/logout" class="blackText">Logout</a></div>
    <header id="main-header">
       <div class="container">
          <h1 class="tabHeaders">Sections</h1>
       </div>
    </header>
-
-   <!-- SOLUTION #1. Use a form to call POST which will send the id 
-        SOLUTION #2. Use similar approach as before and put id in the url-->
    
    <section>
       <div class="container">
@@ -38,27 +35,27 @@
       </div>
    </section>
 
-<!--     <div class="container">
-      <ul id="navbar">
-         <li class="barli"><a href="sections" class="bar">Sections</a></li>
-         <li class="barli"><a href="shoppingList" class="bar">Shopping List</a></li>
-         <li class="barli"><a href="group" class="bar">Group</a></li>
-      </ul>
-   </div> -->
-
-   <button id="addSectionbtn"><i class="fa fa-plus"></i></button>
+   <button id="addSectionbtn" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i></button>
 
    <!--Add section popup-->
-   <div id="myModal" class="modal">
-      <div class="modal-content">
-         <span class="close"><i class="fa fa-window-close"></i></span>
-        <!--  <header id="addSection-header">Add Section</header> -->
-        <h1>Add Section</h1>
-         <form id="addSectionForm" role="form" method="get" action="/addSection">
-            <input type="text" id="sectionName" placeholder="Mini fridge" name="sectionName" required /><br />
-            <input class="adding" type="submit" id="confirmSectionbtn" value="Confirm" />
-         </form>
-         <!--<button id="confirmSectionbtn">Add Section</button>-->
+   <div id="myModal" class="modal fade">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h1>Add Section</h1>
+               <span class="close"><i class="fa fa-window-close"></i></span>
+               <!--  <header id="addSection-header">Add Section</header> -->
+            </div>
+            <div class="modal-body">
+               <form id="addSectionForm" role="form" method="get" action="/addSection">
+                  <label for="sectionName" class="col-form-label">Section Name:</label>
+                  <input type="text" id="sectionName" placeholder="Mini fridge" name="sectionName" class="form-control" required /><br />
+                  <div class="modal-footer">
+                     <input class="btn btn-primary btn-block adding" type="submit" id="confirmSectionbtn" value="Confirm" />
+                  </div>
+               </form>
+            </div>
+         </div>
       </div>
    </div>
 

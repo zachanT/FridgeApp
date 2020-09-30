@@ -23,7 +23,7 @@ window.onload = function () {
 
    // Get the button that opens the modal
    var btn = document.getElementById("addSectionbtn");
-   document.getElementById("addSectionbtn").onclick = function () { myfunction() };
+   //document.getElementById("addSectionbtn").onclick = function () { myfunction() };
 
    // Get the <span> element that closes the modal
    var span = document.getElementsByClassName("close")[0];

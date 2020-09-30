@@ -35,22 +35,28 @@
             {{/each}}
    </div>
 
+   <button id="addSectionbtn" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i></button>
 
-   <button id="addSectionbtn"><i class="fa fa-plus"></i></button>
-
-   <!--Add section popup-->
-   <div id="myModal" class="modal">
-      <div class="modal-content modal-content-list">
-         <span class="close"><i class="fa fa-window-close"></i></span>
-         <h1>Add Item</h1>
-         <form id="addItem" action="/shoppingList" method="POST" >
-            <input type="text" placeholder="Apples" name="itemName" required /><br />
-            <input class="adding" type="submit" id="confirmItembtn" value="Confirm" />
-         </form>
+   <!--Invite Member popup-->
+   <div id="myModal" class="modal fade">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h1>Add Shopping List Item</h1>
+               <span class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-window-close" aria-hidden="true"></i></span>
+            </div>
+            <div class="modal-body">
+               <form id="addItem" role="form" method="POST" action="/shoppingList">
+                  <label for="itemName" class="col-form-label">Item:</label>
+                  <input type="text" placeholder="Eggs" name="itemName" class="form-control" required />
+                  <div class="modal-footer">
+                     <input class="btn btn-primary btn-lg btn-block adding" type="submit" id="confirmItembtn" value="Confirm" />
+                  </div>
+               </form>
+            </div>
+         </div>
       </div>
    </div>
-
-
  <!-- Nav bar -->
    <div class="container-fluid">
       <div class="row fixed-bottom">
