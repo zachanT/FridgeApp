@@ -12,6 +12,9 @@ exports.view = function (request, response) {
          throw err;
       }
       console.log(results.rows);
+      console.log("Test here: ")
+      console.log(request.user.groupid)
+      console.log(request.user.id)
       localStorage.setItem('groupid', request.user.groupid);
       localStorage.setItem('userid', request.user.id);
       response.render('sections', {"sections" : results.rows});
