@@ -4,8 +4,9 @@ FridgeShare
 [Deployed on Heroku](https://fridgeshare.herokuapp.com/)
 
 ### Test account:
-t@gmail.com
-password
+| Email | Password |
+| ----- | -------- |
+| t@gmail.com | password |
 
 ## About FrideShare
 FridgeShare allows users to keep track of items in their fridge or pantry as well as a shopping list! Users also have the option to share items in their fridge and their shopping list with other users. 
